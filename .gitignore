@@ -1,4 +1,4 @@
 *.csv
 *.txt
 __pycache__
-*.sql
+load_data.sql
