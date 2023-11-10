@@ -52,8 +52,8 @@ def txtToCSV(input_file, output_file):
 
 if __name__ == "__main__":
 
-    input_dir = "txt_files/"
-    output_dir = "data/"
+    input_dir = "db/txt_files/"
+    output_dir = "db/data/"
     
     for filename in os.listdir(input_dir):
         if filename.endswith('.txt'):

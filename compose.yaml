@@ -1,39 +1,44 @@
 version: '3'
 
 services:
+  db:
+      image: postgis/postgis:16-3.4
+      restart: always
+      environment:
+        POSTGRES_DB: postgres
+        POSTGRES_USER: admin
+        POSTGRES_PASSWORD: mysecretpassword
+      volumes:
+        - ./db/scripts/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+        - ./db/scripts/load_data.sql:/docker-entrypoint-initdb.d/load_data.sql
+      expose:
+        - 5432
+      ports:
+        - 5432:5432
+      networks:
+        - db-api
+
+
   graphql:
     container_name: api
     restart: always
-    image: graphile/postgraphile
+    image: api-image
+    build: 
+      context: ./api
     depends_on:
       - db
-    environment:
-      DATABASE_URL: postgres://postgres:mysecretpassword@db:5432/postgres # To be moved to environment file
+    # env_file:
+    #   - ./api/.env
     expose:
       - 4000
     ports:
       - 4000:4000
-    command: ["postgraphile", "--connection", $DATABASE_URL, "--host", "0.0.0.0", "--port", "4000", "--schema", "public"]
+    command: ["--connection", "postgres://admin:mysecretpassword@oslofjorddb_db_1:5432/postgres", "--host", "0.0.0.0", "--port", "4000", "--schema", "public"]
     links:
       - db
     networks:
       - db-api
-  db:
-    image: postgis/postgis:16-3.4
-    restart: always
-    environment:
-      POSTGRES_DB: postgres
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: mysecretpassword
-    volumes:
-      - ./db/scripts/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
-      - ./db/scripts/load_data.sql:/docker-entrypoint-initdb.d/load_data.sql
-    expose:
-      - 5432
-    ports:
-      - 5432:5432
-    networks:
-      - db-api
+
 
 networks:
   db-api:
