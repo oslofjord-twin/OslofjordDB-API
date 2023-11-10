@@ -25,7 +25,7 @@ def csvToSQL():
                         n = 1   
 
 
-                    query = "INSERT INTO {} ({}) VALUES\n".format(table_name[n], ', '.join(columns[n]))
+                    query = "INSERT INTO alldata.{} ({}) VALUES\n".format(table_name[n], ', '.join(columns[n]))
                     for row in csv_data:
                         values = ", ".join(["'{}'".format(value) for value in row])
                         query += "({}),\n".format(values)

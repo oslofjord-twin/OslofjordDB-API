@@ -27,7 +27,7 @@ services:
       context: ./api
     depends_on:
       - db
-    # env_file:
+    # env_file: 
     #   - ./api/.env
     expose:
       - 4000
@@ -39,6 +39,15 @@ services:
     networks:
       - db-api
 
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin4_container
+    restart: always
+    ports:
+      - "8888:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user-name@domain-name.com
+      PGADMIN_DEFAULT_PASSWORD: strong-password
 
 networks:
   db-api:

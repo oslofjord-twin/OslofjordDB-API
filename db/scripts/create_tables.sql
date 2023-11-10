@@ -1,4 +1,6 @@
-CREATE TABLE salinity (
+CREATE SCHEMA IF NOT EXISTS alldata;
+
+CREATE TABLE alldata.salinity (
     record_time timestamp,
     record_number int,
     sensor_status varchar(50),
@@ -6,7 +8,7 @@ CREATE TABLE salinity (
     temperature numeric(10, 2)
 );
 
-CREATE TABLE turbidity (
+CREATE TABLE alldata.turbidity (
     record_time timestamp,
     record_number int,
     sensor_status varchar(50),

@@ -2,7 +2,7 @@ FROM postgis/postgis:16-3.4
 
 # Set environment variables
 ENV POSTGRES_DB=postgres
-ENV POSTGRES_USER=postgres
+ENV POSTGRES_USER=admin
 ENV POSTGRES_PASSWORD=mysecretpassword
 
 # Create a directory to hold scripts
