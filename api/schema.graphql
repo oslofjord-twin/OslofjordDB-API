@@ -1,0 +1,29 @@
+
+type Salinity {
+  record_time: timestamp without time zone
+  record_number: integer
+  sensor_status: character varying(50)
+  conductivity: numeric(10,2)
+  temperature: numeric(10,2)
+}
+
+type Turbidity {
+  record_time: timestamp without time zone
+  record_number: integer
+  sensor_status: character varying(50)
+  turbidity: numeric(10,2)
+  temperature: numeric(10,2)
+  txc_amp: numeric(10,2)
+  c1_amp: numeric(10,2)
+  c2_amp: numeric(10,2)
+  raw_temp: numeric(10,2)
+}
+
+type Query {
+  getSalinity: [Salinity]
+  getTurbidity: [Turbidity]
+}
+
+type Query {
+    greeting: String
+}

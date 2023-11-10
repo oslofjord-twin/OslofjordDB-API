@@ -1,15 +1,73 @@
 version: '3'
 
 services:
+  graphql:
+    container_name: api
+    restart: always
+    image: graphile/postgraphile
+    depends_on:
+      - db
+    environment:
+      DATABASE_URL: postgres://postgres:mysecretpassword@db:5432/postgres # To be moved to environment file
+    expose:
+      - 4000
+    ports:
+      - 4000:4000
+    command: ["postgraphile", "--connection", $DATABASE_URL, "--host", "0.0.0.0", "--port", "4000", "--schema", "public"]
+    links:
+      - db
+    networks:
+      - db-api
   db:
     image: postgis/postgis:16-3.4
+    restart: always
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: mysecretpassword
     volumes:
-      - ./scripts/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
-      - ./scripts/load_data.sql:/docker-entrypoint-initdb.d/load_data.sql
+      - ./db/scripts/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+      - ./db/scripts/load_data.sql:/docker-entrypoint-initdb.d/load_data.sql
+    expose:
+      - 5432
     ports:
       - 5432:5432
+    networks:
+      - db-api
+
+networks:
+  db-api:
+
+# The commented out section below is an example of how to define a PostgreSQL
+# database that your application can use. `depends_on` tells Docker Compose to
+# start the database before your application. The `db-data` volume persists the
+# database data between container restarts. The `db-password` secret is used
+# to set the database password. You must create `db/password.txt` and add
+# a password of your choosing to it before running `docker-compose up`.
+#     depends_on:
+#       db:
+#         condition: service_healthy
+#   db:
+#     image: postgres
+#     restart: always
+#     user: postgres
+#     secrets:
+#       - db-password
+#     volumes:
+#       - db-data:/var/lib/postgresql/data
+#     environment:
+#       - POSTGRES_DB=example
+#       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
+#     expose:
+#       - 5432
+#     healthcheck:
+#       test: [ "CMD", "pg_isready" ]
+#       interval: 10s
+#       timeout: 5s
+#       retries: 5
+# volumes:
+#   db-data:
+# secrets:
+#   db-password:
+#     file: db/password.txt
 

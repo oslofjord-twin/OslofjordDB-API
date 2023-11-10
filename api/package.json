@@ -1,0 +1,16 @@
+{
+  "name": "graphql-server-app",
+  "version": "1.0.0",
+  "description": "TODO",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "author": "sandersig",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/server": "^4.9.5",
+    "graphql": "^16.8.1"
+  }
+}
