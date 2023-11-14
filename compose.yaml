@@ -1,87 +1,37 @@
 version: '3'
-
 services:
-  db:
-      image: postgis/postgis:16-3.4
-      restart: always
-      environment:
-        POSTGRES_DB: postgres
-        POSTGRES_USER: admin
-        POSTGRES_PASSWORD: mysecretpassword
-      volumes:
-        - ./db/scripts/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
-        - ./db/scripts/load_data.sql:/docker-entrypoint-initdb.d/load_data.sql
-      expose:
-        - 5432
-      ports:
-        - 5432:5432
-      networks:
-        - db-api
-
-
-  graphql:
-    container_name: api
-    restart: always
-    image: api-image
-    build: 
-      context: ./api
-    depends_on:
-      - db
-    # env_file: 
-    #   - ./api/.env
-    expose:
-      - 4000
+  timescale:
+    container_name: timescale
+    image: timescale/timescaledb:latest-pg10
+    restart: unless-stopped
+    environment:
+      POSTGRES_PASSWORD: postgrespassword
+    volumes:
+    - ./db/scripts/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
+    - ./db/scripts/load_data.sql:/docker-entrypoint-initdb.d/load_data.sql
+    -  db_data:/var/lib/postgresql/data
+  graphql-engine:
+    image: hasura/graphql-engine:v2.35.1-ce.cli-migrations-v2
     ports:
-      - 4000:4000
-    command: ["--connection", "postgres://admin:mysecretpassword@oslofjorddb_db_1:5432/postgres", "--host", "0.0.0.0", "--port", "4000", "--schema", "public"]
-    links:
-      - db
-    networks:
-      - db-api
-
+    - "8080:8080"
+    depends_on:
+    - "timescale"
+    restart: unless-stopped
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@timescale:5432/postgres
+      HASURA_GRAPHQL_ACCESS_KEY: mylongsecretkey
+    command:
+      - graphql-engine
+      - serve
+      - --enable-console
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin4_container
-    restart: always
+    restart: unless-stopped
     ports:
       - "8888:80"
     environment:
       PGADMIN_DEFAULT_EMAIL: user-name@domain-name.com
       PGADMIN_DEFAULT_PASSWORD: strong-password
-
-networks:
-  db-api:
-
-# The commented out section below is an example of how to define a PostgreSQL
-# database that your application can use. `depends_on` tells Docker Compose to
-# start the database before your application. The `db-data` volume persists the
-# database data between container restarts. The `db-password` secret is used
-# to set the database password. You must create `db/password.txt` and add
-# a password of your choosing to it before running `docker-compose up`.
-#     depends_on:
-#       db:
-#         condition: service_healthy
-#   db:
-#     image: postgres
-#     restart: always
-#     user: postgres
-#     secrets:
-#       - db-password
-#     volumes:
-#       - db-data:/var/lib/postgresql/data
-#     environment:
-#       - POSTGRES_DB=example
-#       - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
-#     expose:
-#       - 5432
-#     healthcheck:
-#       test: [ "CMD", "pg_isready" ]
-#       interval: 10s
-#       timeout: 5s
-#       retries: 5
-# volumes:
-#   db-data:
-# secrets:
-#   db-password:
-#     file: db/password.txt
-
+volumes:
+  db_data:
