@@ -1,5 +1,7 @@
+CREATE EXTENSION IF NOT EXISTS postgis;
+
 CREATE TABLE salinity (
-    record_time timestamp,
+    record_time timestamptz,
     record_number int,
     sensor_status varchar(50),
     conductivity numeric(10, 2),
@@ -7,7 +9,7 @@ CREATE TABLE salinity (
 );
 
 CREATE TABLE turbidity (
-    record_time timestamp,
+    record_time timestamptz,
     record_number int,
     sensor_status varchar(50),
     turbidity numeric(10, 2),
@@ -17,3 +19,5 @@ CREATE TABLE turbidity (
     c2_amp numeric(10, 2),
     raw_temp numeric(10, 2)
 );
+
+SET timezone = "Europe/Oslo";

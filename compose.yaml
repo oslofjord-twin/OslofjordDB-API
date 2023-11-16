@@ -2,14 +2,21 @@ version: '3'
 services:
   timescale:
     container_name: timescale
-    image: timescale/timescaledb:latest-pg10
+    image: timescale/timescaledb-ha:pg14-latest
+    # build: ./db
     restart: unless-stopped
     environment:
+      POSTGRES_DB: oslofjord
+      POSTGRES_USER: admin
       POSTGRES_PASSWORD: postgrespassword
+      POSTGRES_HOST: oslofjord
+    ports:
+      - 5432:5432
     volumes:
     - ./db/scripts/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
     - ./db/scripts/load_data.sql:/docker-entrypoint-initdb.d/load_data.sql
     -  db_data:/var/lib/postgresql/data
+
   graphql-engine:
     image: hasura/graphql-engine:v2.35.1-ce.cli-migrations-v2
     ports:
@@ -18,12 +25,13 @@ services:
     - "timescale"
     restart: unless-stopped
     environment:
-      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@timescale:5432/postgres
+      HASURA_GRAPHQL_DATABASE_URL: postgres://admin:postgrespassword@timescale:5432/postgres
       HASURA_GRAPHQL_ACCESS_KEY: mylongsecretkey
     command:
       - graphql-engine
       - serve
       - --enable-console
+
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin4_container
@@ -33,5 +41,9 @@ services:
     environment:
       PGADMIN_DEFAULT_EMAIL: user-name@domain-name.com
       PGADMIN_DEFAULT_PASSWORD: strong-password
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
 volumes:
   db_data:
+  pgadmin_data:
