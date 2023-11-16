@@ -6,10 +6,9 @@ services:
     # build: ./db
     restart: unless-stopped
     environment:
-      POSTGRES_DB: oslofjord
-      POSTGRES_USER: admin
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgrespassword
-      POSTGRES_HOST: oslofjord
     ports:
       - 5432:5432
     volumes:
@@ -25,7 +24,7 @@ services:
     - "timescale"
     restart: unless-stopped
     environment:
-      HASURA_GRAPHQL_DATABASE_URL: postgres://admin:postgrespassword@timescale:5432/postgres
+      HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@timescale:5432/postgres
       HASURA_GRAPHQL_ACCESS_KEY: mylongsecretkey
     command:
       - graphql-engine

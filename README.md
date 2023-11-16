@@ -26,10 +26,10 @@ You can also connect to the database using another database manager. E.g. QGIS o
 To connect you insert:
 - host: "localhost"
 - port: "5432"
-- database: "oslofjord" 
+- database: "postgres" 
 
 You will also need to insert username and password when prompted. 
-- Username: "admin"
+- Username: "postgres"
 The password is stored in the compose-file. If you did not change it, just use the standard password that was already written in the file.  
 
 ![](images/qgis.png)
