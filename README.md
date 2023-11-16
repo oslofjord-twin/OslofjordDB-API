@@ -19,7 +19,7 @@ To check that the containers are up and running, you can run `docker ps`.
 
 After starting you can reach the following services:
 - PGadmin can be reached at http://localhost:8888
-- Hasura can be reached at http://localhost:8080 (for playing around with graphql on our data)
+- Hasura can be reached at http://localhost:8080 (for playing around with graphql on our data). Before being able to perform graphql-queries, you will need to go to "Data" at the top menu -> "public" -> choose "track" on both the salinity and turbidity schemas.
 
 You can also connect to the database using another database manager. E.g. QGIS or DBeaver.
 
