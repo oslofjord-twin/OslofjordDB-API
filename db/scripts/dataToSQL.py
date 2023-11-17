@@ -7,8 +7,8 @@ def csvToSQL():
     sql_file = './db/scripts/load_data.sql'
 
     table_name = ['turbidity', 'salinity']
-    columns = [['record_time', 'record_number', 'sensor_status', 'turbidity', 'temperature', 'txc_amp', 'c1_amp', 'c2_amp', 'raw_temp'], 
-    ['record_time', 'record_number', 'sensor_status', 'conductivity', 'temperature']]
+    columns = [['record_time', 'record_number', 'sensor_status', 'turbidity', 'temperature', 'txc_amp', 'c1_amp', 'c2_amp', 'raw_temp', 'location'], 
+    ['record_time', 'record_number', 'sensor_status', 'conductivity', 'temperature', 'location']]
 
 
     with open(sql_file, 'w') as sql_file:

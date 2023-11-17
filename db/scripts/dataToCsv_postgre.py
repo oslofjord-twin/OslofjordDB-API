@@ -14,14 +14,24 @@ def txtToCSV(input_file, output_file):
         csv_writer = csv.writer(outfile)
 
         # Write the header row
-        for i in range(13):
+        for i in range(7):
             infile.readline()
+        coordinate = infile.readline()
+        for i in range(5):
+            infile.readline()
+
         filetype = infile.readline()
         filetype = filetype.strip()
 
+        coordinate = coordinate.strip()
+        coordinate = re.split("\t", coordinate)
+
+        coordinate = coordinate[1].replace(",", " ")
+        loc = f"POINT({coordinate})"
+
         if(filetype == "Conductivity Sensor #399"):
             csv_writer.writerow(["salinity"])
-            csv_writer.writerow(['Record time', 'Record number', 'Sensor status', 'Conductivity', 'Temperature'])
+            csv_writer.writerow(['Record time', 'Record number', 'Sensor status', 'Conductivity', 'Temperature', "Location"])
             infile.readline()
             for line in infile:
                 # Split the line into columns using tab as the delimiter (adjust as needed)
@@ -29,19 +39,21 @@ def txtToCSV(input_file, output_file):
                 columns = re.split(r'\t+', columns)
                 # columns[0] = re.sub(" ", "T", columns[0])
                 columns[0] = columns[0] + "-08"
+                columns.append(loc)
                 csv_writer.writerow(columns)
             
             return "salinity"
 
         elif(filetype == "Turbidity Sensor #78"):
             csv_writer.writerow(["turbidity"])
-            csv_writer.writerow(['Record time', 'Record number', 'Sensor status', 'Turbidity', 'Temperature', "TXC Amp", "C1Amp", "C2Amp", "RawTemp"])
+            csv_writer.writerow(['Record time', 'Record number', 'Sensor status', 'Turbidity', 'Temperature', "TXC Amp", "C1Amp", "C2Amp", "RawTemp", "Location"])
             infile.readline()
             for line in infile:
                 # Split the line into columns using tab as the delimiter (adjust as needed)
                 columns = line.strip()
                 columns = re.split(r'\t+', columns)
                 columns[0] = columns[0] + "-08"
+                columns.append(loc)
                 csv_writer.writerow(columns)
             
             return "turbidity"
