@@ -3,7 +3,6 @@ services:
   timescale:
     container_name: timescale
     image: timescale/timescaledb-ha:pg14-latest
-    # build: ./db
     restart: unless-stopped
     environment:
       POSTGRES_DB: postgres
