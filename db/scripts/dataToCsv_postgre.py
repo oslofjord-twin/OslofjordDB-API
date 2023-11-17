@@ -28,7 +28,7 @@ def txtToCSV(input_file, output_file):
                 columns = line.strip()
                 columns = re.split(r'\t+', columns)
                 # columns[0] = re.sub(" ", "T", columns[0])
-                # columns[0] = columns[0] + "Z"
+                columns[0] = columns[0] + "-08"
                 csv_writer.writerow(columns)
             
             return "salinity"
@@ -41,6 +41,7 @@ def txtToCSV(input_file, output_file):
                 # Split the line into columns using tab as the delimiter (adjust as needed)
                 columns = line.strip()
                 columns = re.split(r'\t+', columns)
+                columns[0] = columns[0] + "-08"
                 csv_writer.writerow(columns)
             
             return "turbidity"
@@ -52,8 +53,8 @@ def txtToCSV(input_file, output_file):
 
 if __name__ == "__main__":
 
-    input_dir = "txt_files/"
-    output_dir = "data/"
+    input_dir = "db/txt_files/"
+    output_dir = "db/data/"
     
     for filename in os.listdir(input_dir):
         if filename.endswith('.txt'):
