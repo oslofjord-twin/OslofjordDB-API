@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useQuery } from "@apollo/client";
-import {GET_TURBDITY} from "../queries/gqlQueries"
+import { GET_TURBDITY } from "../queries/gqlQueries"
 
 const ApiCallExample = () => {
     const { loading, error, data } = useQuery(GET_TURBDITY);
