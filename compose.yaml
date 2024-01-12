@@ -14,7 +14,6 @@ services:
     - ./db/scripts/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
     - ./db/scripts/load_data.sql:/docker-entrypoint-initdb.d/load_data.sql
     -  db_data:/var/lib/postgresql/data
-
   graphql-engine:
     image: hasura/graphql-engine:v2.35.1-ce.cli-migrations-v2
     ports:
@@ -24,12 +23,21 @@ services:
     restart: unless-stopped
     environment:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@timescale:5432/postgres
-      HASURA_GRAPHQL_ACCESS_KEY: mylongsecretkey
+      #HASURA_GRAPHQL_ACCESS_KEY: mylongsecretkey
     command:
       - graphql-engine
       - serve
       - --enable-console
-
+  api-web-server:
+    container_name: api-web-server
+    restart: unless-stopped
+    build:
+      context: .
+    depends_on:
+      - "timescale"
+      - "graphql-engine"
+    ports:
+    - "3000:3000"
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin4_container
