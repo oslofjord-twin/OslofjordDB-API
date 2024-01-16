@@ -20,7 +20,7 @@ services:
     ports:
     - "8080:8080"
     depends_on:
-    - "timescale"
+    - timescale
     restart: unless-stopped
     environment:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@timescale:5432/postgres
@@ -29,6 +29,11 @@ services:
       - graphql-engine
       - serve
       - --enable-console
+    healthcheck:
+      test: curl --fail http://localhost:8080/ || exit 1
+      interval: 40s
+      timeout: 15s
+      retries: 2
 
   pgadmin:
     image: dpage/pgadmin4
@@ -40,8 +45,18 @@ services:
       PGADMIN_DEFAULT_EMAIL: user-name@domain-name.com
       PGADMIN_DEFAULT_PASSWORD: strong-password
     volumes:
-      - pgadmin_data:/var/lib/pgadmin
+      - pgadmin_data:/var/lib/pgadmin  
 
+  init:
+    image: python:latest
+    depends_on:
+      graphql-engine:
+        condition: service_healthy
+    volumes:
+     - ./db/scripts/track_tables.py:/track_tables.py
+    command: >
+      /bin/sh -c 'pip install requests && python track_tables.py'
+    
 volumes:
   db_data:
   pgadmin_data:
