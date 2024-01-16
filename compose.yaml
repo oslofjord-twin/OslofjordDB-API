@@ -14,7 +14,6 @@ services:
     - ./db/scripts/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
     - ./db/scripts/load_data.sql:/docker-entrypoint-initdb.d/load_data.sql
     -  db_data:/var/lib/postgresql/data
-
   graphql-engine:
     image: hasura/graphql-engine:v2.35.1-ce.cli-migrations-v2
     ports:
@@ -34,6 +33,17 @@ services:
       interval: 40s
       timeout: 15s
       retries: 2
+
+  api-web-server:
+    container_name: api-web-server
+    restart: unless-stopped
+    build:
+      context: .
+    depends_on:
+      - "timescale"
+      - "graphql-engine"
+    ports:
+    - "3000:3000"
 
   pgadmin:
     image: dpage/pgadmin4
