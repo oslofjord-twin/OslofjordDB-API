@@ -34,7 +34,7 @@ params = {
   }
 }
 
-headers = {"Content-Type": "application/json", "X-Hasura-Role": "admin", "X-Hasura-Access-Key": "mylongsecretkey"}
+headers = {"Content-Type": "application/json", "X-Hasura-Role": "admin", "x-hasura-admin-secret": "mylongsecretkey"}
 
 response = requests.post(url, json=params, headers=headers)
 print(response.content)

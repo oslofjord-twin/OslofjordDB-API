@@ -1,7 +1,7 @@
-import ApiCallExample from './components/ApiCallExample';
+import AuthClient from './components/AuthClient';
 
 export default function Home() {
   return (
-    <ApiCallExample/>
+    <AuthClient/>
   )
-    }
+}

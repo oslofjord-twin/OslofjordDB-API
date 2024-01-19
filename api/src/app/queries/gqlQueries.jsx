@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 
+// Add position 
 export const GET_SALINITY_TIME_FRAME = gql`
     query Salinity($date_from: timestamptz!, $date_to: timestamptz!) {
       salinity(where: {record_time: {_gte: ,$date_from _lte: $date_to}}) {
