@@ -23,7 +23,7 @@ services:
     restart: unless-stopped
     environment:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@timescale:5432/postgres
-      #HASURA_GRAPHQL_ACCESS_KEY: mylongsecretkey
+      HASURA_GRAPHQL_ADMIN_SECRET: mylongsecretkey
     command:
       - graphql-engine
       - serve
@@ -40,8 +40,8 @@ services:
     build:
       context: .
     depends_on:
-      - "timescale"
-      - "graphql-engine"
+      - timescale
+      - graphql-engine
     ports:
     - "3000:3000"
 
