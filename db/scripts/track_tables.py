@@ -29,6 +29,16 @@ params = {
         "apollo_federation_config": {
           "enable": "v1"
         }
+      },
+      {
+        "source": "default",
+        "table": "simulations",
+        "configuration": {
+          "comment": "Simulation values for virtual landers"
+        },
+        "apollo_federation_config": {
+          "enable": "v1"
+        }
       }
     ]
   }

@@ -22,4 +22,12 @@ CREATE TABLE turbidity (
     location GEOGRAPHY(POINT, 4326)
 );
 
+CREATE TABLE simulations (
+    record_time timestamptz,
+    conductivity numeric(10, 2),
+    temperature numeric(10, 2),
+    turbidity numeric(10, 2),
+    location GEOGRAPHY(POINT, 4326)
+);
+
 SET timezone = "Europe/Oslo";
