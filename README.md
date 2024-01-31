@@ -1,7 +1,7 @@
 # OslofjordDB
 OslofjordDB
 
-Consists of four containers, one for the DB, one for Hasura, one for PGadmin and one serving as the web-api.
+Consists of five containers, one for the DB, one for Hasura, one for PGadmin, one running a script only at startup, and one serving as the web-api.
 
 ## Installation
 Here i will explain step by step how to install the docker container with some data in the database.
@@ -31,7 +31,7 @@ For more information about how to explore the data using GraphQL, I would recomm
 
 There is also an example of how to connect to our Hasura GraphQL endpoint using Apollo Client running on a next.js-server.
 - The example implementation can be found at: 'OslofjordDB/api/src/app/components/'
-- There is also some example queris located in: 'OslofjordDB/api/src/app/queries/gqlQueries.jsx'
+- There is also some example queries located in: 'OslofjordDB/api/src/app/queries/gqlQueries.jsx'
 
 ## DB manager
 
