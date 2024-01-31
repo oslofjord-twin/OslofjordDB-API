@@ -21,6 +21,20 @@ After starting you can reach the following services:
 - PGadmin can be reached at http://localhost:8888
 - Hasura can be reached at http://localhost:8080 (for playing around with graphql on our data).
 
+## API documentation
+Since GraphQL is a self-documenting query language, it can be explored directly in the GraphiQL-playground available at http://localhost:8080. I would recommend exploring the data using the different types of queries. A tip is to use the "Docs"-page at the top right of GraphiQL, that includes comments and documentation about the different queries and mutations available (NB! This is still a work in progress). 
+
+For more information about how to explore the data using GraphQL, I would recommend checking out Hasura's own documentation:
+- Queries: https://hasura.io/docs/latest/queries/overview/
+- Mutations: https://hasura.io/docs/latest/mutations/overview/
+- Subscriptions: https://hasura.io/docs/latest/subscriptions/overview/
+
+There is also an example of how to connect to our Hasura GraphQL endpoint using Apollo Client running on a next.js-server.
+- The example implementation can be found at: 'OslofjordDB/api/src/app/components/'
+- There is also some example queris located in: 'OslofjordDB/api/src/app/queries/gqlQueries.jsx'
+
+## DB manager
+
 You can also connect to the database using another database manager. E.g. QGIS or DBeaver.
 
 To connect you insert:
