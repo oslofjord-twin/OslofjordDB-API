@@ -1,6 +1,6 @@
 CREATE EXTENSION IF NOT EXISTS postgis;
 
-CREATE TABLE salinity (
+CREATE TABLE IF NOT EXISTS salinity (
     record_time timestamptz,
     record_number int,
     sensor_status varchar(50),
@@ -9,7 +9,7 @@ CREATE TABLE salinity (
     location GEOGRAPHY(POINT, 4326)
 );
 
-CREATE TABLE turbidity (
+CREATE TABLE IF NOT EXISTS turbidity (
     record_time timestamptz,
     record_number int,
     sensor_status varchar(50),
@@ -22,7 +22,7 @@ CREATE TABLE turbidity (
     location GEOGRAPHY(POINT, 4326)
 );
 
-CREATE TABLE simulations (
+CREATE TABLE IF NOT EXISTS simulations (
     record_time timestamptz,
     conductivity numeric(10, 2),
     temperature numeric(10, 2),
