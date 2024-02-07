@@ -32,3 +32,12 @@ export const GET_TURBDITY = gql`
     }
   }
 `;
+
+export const GET_INTERSECTION = gql`
+  query Intersection($point: geometry!){
+    grid(where: {geom: {_st_intersects: $point}}) {
+      geom
+      id
+    }
+  }
+`;

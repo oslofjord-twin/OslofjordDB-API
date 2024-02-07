@@ -103,6 +103,16 @@ params = {
         "apollo_federation_config": {
           "enable": "v1"
         }
+      },
+      {
+        "source": "default",
+        "table": "grid",
+        "configuration": {
+          "comment": "Grid for the Oslofjord"
+        },
+        "apollo_federation_config": {
+          "enable": "v1"
+        }
       }
     ]
   }
