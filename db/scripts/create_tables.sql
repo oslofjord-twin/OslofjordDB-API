@@ -23,3 +23,9 @@ CREATE TABLE turbidity (
 );
 
 SET timezone = "Europe/Oslo";
+
+CREATE TABLE grid AS
+SELECT * FROM ST_SquareGrid(0.05, ST_MakeEnvelope(10, 59, 11, 59.95, 4326));
+
+ALTER TABLE grid
+ADD column id SERIAL PRIMARY KEY;
