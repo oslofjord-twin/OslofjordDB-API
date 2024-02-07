@@ -25,8 +25,15 @@ def txtToCSV(input_file, output_file):
 
         coordinate = coordinate.strip()
         coordinate = re.split("\t", coordinate)
+        coordinate = coordinate[1]
+        coordinate = coordinate.split(",")
+        tempCor = coordinate[0]
+        coordinate[0] = coordinate[1]
+        coordinate[1] = tempCor
 
-        coordinate = coordinate[1].replace(",", " ")
+        coordinate = ' '.join(coordinate)
+        print(coordinate)
+
         loc = f"POINT({coordinate})"
 
         if(filetype == "Conductivity Sensor #399"):
