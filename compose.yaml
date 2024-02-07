@@ -43,19 +43,7 @@ services:
       - timescale
       - graphql-engine
     ports:
-    - "3000:3000"
-
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: pgadmin4_container
-    restart: unless-stopped
-    ports:
-      - "8888:80"
-    environment:
-      PGADMIN_DEFAULT_EMAIL: user-name@domain-name.com
-      PGADMIN_DEFAULT_PASSWORD: strong-password
-    volumes:
-      - pgadmin_data:/var/lib/pgadmin  
+    - "3000:3000" 
 
   init:
     image: python:latest
