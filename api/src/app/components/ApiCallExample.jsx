@@ -11,6 +11,7 @@ const ApiCallExample = () => {
     if (loading) {
       return <div>Loading...</div>;
     }
+    
     if (error) {
       console.error(error);
       return <div>Error!</div>;

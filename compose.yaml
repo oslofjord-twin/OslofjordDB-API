@@ -45,6 +45,18 @@ services:
     ports:
     - "3000:3000" 
 
+  fuseki:
+    container_name: fuseki
+    restart: unless-stopped
+    build:
+      context: ./fuseki
+      dockerfile: Dockerfile
+    ports:
+    - "3030:3030" 
+    volumes:
+    - ./fuseki/data:/fuseki/data
+
+
   init:
     image: python:latest
     depends_on:
@@ -57,4 +69,4 @@ services:
 
 volumes:
   db_data:
-  pgadmin_data:
+  fuseki_data:
