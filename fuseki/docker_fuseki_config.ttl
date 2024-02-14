@@ -47,11 +47,17 @@ PREFIX :        <#>
 
 <#dataset> rdf:type ja:RDFDataset;
      tdb2:location "tree_shapes.ttl" ;
-     ja:defaultGraph <#inferenceModel> ;
+     ja:defaultGraph <#baseModel> ;
      tdb2:unionDefaultGraph true ;
      .
      
 <#inferenceModel> rdf:type      ja:InfModel;
      ja:reasoner [ ja:reasonerURL <http://jena.hpl.hp.com/2003/OWLFBRuleReasoner> ];
+     ja:baseModel <#baseModel>;
+     .
+
+<#baseModel> rdf:type tdb2:GraphTDB2;
+     tdb2:location "/usr/local/src/fuseki/run/databases/ds/";
+     # etc
      .
     

@@ -1,7 +1,7 @@
 # OslofjordDB
 OslofjordDB
 
-Consists of five containers, one for the DB, one for Hasura, one for PGadmin, one running a script only at startup, and one serving as the web-api.
+Consists of six containers, one for the DB, one for Hasura, one for Apache Jena Fuseki, one for PGadmin, one running a script only at startup, and one serving as the web-api.
 
 ## Installation
 Here i will explain step by step how to install the docker container with some data in the database.
