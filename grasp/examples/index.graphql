@@ -1,0 +1,14 @@
+directive @embedded on OBJECT
+
+type Query {
+  """
+  returns a quanto entry of IRI
+  """
+  sequenceStatisticsReport(iri: String!): SequenceStatisticsReport
+  sequenceStatisticsReports(iri: [String!]!): [SequenceStatisticsReport!]!
+  fish: [Fish!]!
+  dataset: [Triples!]!
+  datasets(iri: [String!]!): [Dataset!]!
+  pubmed(iri: String!): Pubmed
+  pubmeds(iri: [String!], id: [String!]): [Pubmed!]!
+}
