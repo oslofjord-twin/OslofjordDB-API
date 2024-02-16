@@ -28,7 +28,7 @@ Make (the predefined queries) of the Knowledge Graph data available in our Graph
 2. Press "Add"
 3. Fill in the following: 
 
-![alt text](<Screenshot 2024-02-16 at 15.54.23.png>)
+![alt text](<grasp-remote-schema.png>)
 
 4. Press "Add Remote Schema"
 5. Now the pre-defined SparQL queries found at `grasp/examples` will be available in our GraphQL API.
