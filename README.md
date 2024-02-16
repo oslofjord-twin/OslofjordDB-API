@@ -34,7 +34,6 @@ Make (the predefined queries) of the Knowledge Graph data available in our Graph
 5. Now the pre-defined SparQL queries found at `grasp/examples` will be available in our GraphQL API.
 
 After starting you can reach the following services:
-- PGadmin can be reached at http://localhost:8888
 - Hasura can be reached at http://localhost:8080 (for playing around with graphql on our data).
 - Apache Jena Fuseki can be reached at http://localhost:3030
 
