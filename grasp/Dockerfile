@@ -1,10 +1,11 @@
-FROM node:14
+FROM node:18.16.0-alpine3.17
 
-RUN useradd --create-home --home-dir /app app
-
-USER app
-WORKDIR /app
-COPY --chown=app:app . .
-
-RUN npm ci --production
-CMD npm run watch
+RUN mkdir -p /opt/app
+WORKDIR /opt/app
+COPY /package.json .
+COPY /package-lock.json .
+RUN npm install
+COPY . .
+EXPOSE 4000:4000
+ENV RESOURCES_DIR=./examples
+CMD npm start

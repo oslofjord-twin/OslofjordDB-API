@@ -56,7 +56,17 @@ services:
     - "3030:3030" 
     volumes:
     - fuseki_data:/usr/local/src/fuseki/run/databases
-    
+  
+  grasp:
+    container_name: grasp
+    restart: unless-stopped
+    build:
+      context: ./grasp
+      dockerfile: Dockerfile
+    ports:
+    - "4000:4000"
+    depends_on:
+      - fuseki
   init:
     image: python:latest
     depends_on:

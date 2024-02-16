@@ -1,6 +1,6 @@
 """
 --- endpoint ---
-http://localhost:3030/ds/query
+http://host.docker.internal:3030/ds/query
 
 --- sparql ---
 SELECT ?subject ?predicate ?object
