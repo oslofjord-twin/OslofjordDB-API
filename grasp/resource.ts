@@ -197,7 +197,6 @@ export default class Resource {
       console.log(data.results.bindings);
 
       return data.results.bindings.map((bindings: any) => {
-        // map values returned to string
         return mapValues(bindings, (value) => value.value);
       });
       

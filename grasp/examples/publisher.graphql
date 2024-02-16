@@ -1,5 +1,0 @@
-type Publisher @embedded {
-  name_ja: String
-  name_en: String
-  page: String
-}
