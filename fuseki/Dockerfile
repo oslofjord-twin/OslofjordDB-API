@@ -21,13 +21,13 @@ COPY /docker_fuseki_config.ttl /usr/local/src/fuseki
 WORKDIR /usr/local/src/fuseki
 
 # Download and copy the tar.gz file into the container
-ADD https://dlcdn.apache.org/jena/binaries/apache-jena-fuseki-4.10.0.tar.gz /usr/local/src/fuseki
+ADD https://dlcdn.apache.org/jena/binaries/apache-jena-fuseki-5.0.0-rc1.tar.gz /usr/local/src/fuseki
 
 # Extract the tar.gz file
-RUN tar -xvzf apache-jena-fuseki-4.10.0.tar.gz
+RUN tar -xvzf apache-jena-fuseki-5.0.0-rc1.tar.gz
 
 # Execute the command
-CMD /usr/local/src/fuseki/apache-jena-fuseki-4.10.0/fuseki-server --update --config docker_fuseki_config.ttl
+CMD /usr/local/src/fuseki/apache-jena-fuseki-5.0.0-rc1/fuseki-server --update --config docker_fuseki_config.ttl
 
 # Expose port 3030
 EXPOSE 3030
