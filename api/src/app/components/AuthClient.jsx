@@ -28,7 +28,7 @@ const createApolloClient = () => {
   })
 };
     
-const AuthClient = ({ children }) => {
+const AuthClient = () => {
   const { loading, logout } = useAuth0();
   if (loading) {
     <div>Loading...</div>

@@ -1,0 +1,16 @@
+"""
+--- endpoint ---
+http://host.docker.internal:3030/ds/query
+
+--- sparql ---
+SELECT ?subject ?predicate ?object
+WHERE {
+  ?subject ?predicate ?object
+}
+LIMIT 25
+"""
+type Triples {
+  subject: String!
+  predicate: String!
+  object: String!
+}
