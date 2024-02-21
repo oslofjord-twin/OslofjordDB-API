@@ -1,6 +1,6 @@
 """
 --- endpoint ---
-http://host.docker.internal:3030/ds/query
+http://localhost:3030/ds/query
 
 --- sparql ---
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
@@ -18,10 +18,12 @@ ASK WHERE{
        ?b owl:onProperty ast:minTemperature .
        ?b2 owl:hasValue ?maxTemp .
        ?b2 owl:onProperty ast:maxTemperature .
-       FILTER(?minTemp > xsd:double(5) && ?maxTemp < xsd:double(5) && ?name = xsd:string("name")) .
+       {{#if temperature}}
+       FILTER(?minTemp <= xsd:int({{temperature}}) && ?maxTemp >= xsd:int({{temperature}}) && ?name = xsd:string("{{name}}")) .
+       {{/if}}  
 }
 """
-type FilterByT {
+type FilterByT{
     boolean: Boolean!
 }
 
