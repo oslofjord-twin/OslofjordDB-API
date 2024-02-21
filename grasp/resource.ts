@@ -195,7 +195,10 @@ export default class Resource {
     if (res.ok) {
       const data = (await res.json()) as any;
       console.log(data.results.bindings);
-
+      
+      if(data.results.bindings === undefined){
+        return (data.results.boolean === true ? true : false);
+      }
       return data.results.bindings.map((bindings: any) => {
         return mapValues(bindings, (value) => value.value);
       });
