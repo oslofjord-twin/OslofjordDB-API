@@ -7,6 +7,9 @@ type Query {
   sequenceStatisticsReport(iri: String!): SequenceStatisticsReport
   sequenceStatisticsReports(iri: [String!]!): [SequenceStatisticsReport!]!
   fish: [Fish!]!
+  filterByT(temperature: Int!, name: String!): [FilterByT!]!
+  species: [Species!]!
   triples: [Triples!]!
   classes: [Classes!]!
+  fishFields(name: String!): [FishFields!]!
 }
