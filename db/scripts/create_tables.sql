@@ -28,6 +28,9 @@ CREATE TABLE IF NOT EXISTS turbidity (
 
 select create_hypertable('salinity', 'record_time', chunk_time_interval => INTERVAL '1 hour');
 
+select create_hypertable('turbidity', 'record_time', chunk_time_interval => INTERVAL '1 hour');
+
+
 CREATE TABLE grid AS
 SELECT * FROM ST_SquareGrid(0.05, ST_MakeEnvelope(10, 59, 11, 59.95, 4326));
 
@@ -41,5 +44,7 @@ CREATE TABLE IF NOT EXISTS simulations (
     conductivity numeric(10, 2),
     temperature numeric(10, 2),
     turbidity numeric(10, 2),
-    location GEOGRAPHY(POINT, 4326)
+    location GEOGRAPHY(POINT, 4326),
+    id_sim SERIAL PRIMARY KEY,
+    grid_id int
 );
