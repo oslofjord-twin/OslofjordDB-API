@@ -11,5 +11,5 @@ type Query {
   species: [Species!]!
   triples: [Triples!]!
   classes: [Classes!]!
-  fishFields(fish: String!): [FishFields!]!
+  fishFields(name: String!): [FishFields!]!
 }
