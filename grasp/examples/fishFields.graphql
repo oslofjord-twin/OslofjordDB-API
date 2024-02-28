@@ -3,48 +3,73 @@
 http://host.docker.internal:3030/ds/query
 
 --- sparql ---
-PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX ast: <http://www.smolang.org/oslofjordDT#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
-SELECT DISTINCT ?name ?minTemp ?maxTemp ?minSpawnTemp ?maxSpawnTemp ?prefMinSpawnTemp ?prefMaxSpawnTemp WHERE{
-       ?fish rdfs:subClassOf ?b1 .
-       ?b1 owl:onProperty ast:Name .
-       ?b1 owl:hasValue ?name .
-       ?fish rdfs:subClassOf ?b .
-       ?b owl:hasValue ?minTemp .
-       ?b owl:onProperty ast:minTemperature .
-       ?fish rdfs:subClassOf ?b2 .
-       ?b2 owl:hasValue ?maxTemp .
-       ?b2 owl:onProperty ast:maxTemperature .
-       ?fish rdfs:subClassOf ?b3 .
-       ?b3 owl:hasValue ?minSpawnTemp .
-       ?b3 owl:onProperty ast:minSpawningTemperature .
-       ?fish rdfs:subClassOf ?b4 .
-       ?b4 owl:hasValue ?maxSpawnTemp .
-       ?b4 owl:onProperty ast:maxSpawningTemperature .
-       ?fish rdfs:subClassOf ?b5 .
-       ?b5 owl:hasValue ?prefMinSpawnTemp .
-       ?b5 owl:onProperty ast:preferredMinSpawningTemperature .
-       ?fish rdfs:subClassOf ?b6 .
-       ?b6 owl:hasValue ?prefMaxSpawnTemp .
-       ?b6 owl:onProperty ast:preferredMaxSpawningTemperature.
-       {{#if name}}
-       FILTER(?name = xsd:string("{{name}}")) .
-       {{/if}} 
-       
+SELECT DISTINCT
+    ?name
+    ?maxSpawnTemp
+    ?minSpawnTemp
+    ?maxTemp
+    ?minTemp
+    ?prefMaxSpawnTemp
+    ?prefMinSpawnTemp
+WHERE {
+    ?species rdfs:subClassOf ?b1 .
+    ?b1 owl:hasValue ?name ;
+        owl:onProperty ast:Name .
+    {{#if name}}
+    FILTER (?name = "{{name}}"^^xsd:string)
+    {{/if}} 
+
+    OPTIONAL {
+        ?species rdfs:subClassOf ?b2 .
+        ?b2 owl:hasValue ?maxSpawnTemp ;
+            owl:onProperty ast:maxSpawningTemperature .
+    }
+
+    OPTIONAL {
+        ?species rdfs:subClassOf ?b3 .
+        ?b3 owl:hasValue ?minSpawnTemp ;
+            owl:onProperty ast:minSpawningTemperature .
+    }
+
+    OPTIONAL {
+        ?species rdfs:subClassOf ?b4 .
+        ?b4 owl:hasValue ?maxTemp ;
+            owl:onProperty ast:maxTemperature .
+    }
+
+    OPTIONAL {
+        ?species rdfs:subClassOf ?b5 .
+        ?b5 owl:hasValue ?minTemp ;
+            owl:onProperty ast:minTemperature .
+    }
+
+    OPTIONAL {
+        ?species rdfs:subClassOf ?b6 .
+        ?b6 owl:hasValue ?prefMaxSpawnTemp ;
+            owl:onProperty ast:preferredMaxSpawningTemperature .
+    }
+
+    OPTIONAL {
+        ?species rdfs:subClassOf ?b7 .
+        ?b7 owl:hasValue ?prefMinSpawnTemp ;
+            owl:onProperty ast:preferredMinSpawningTemperature .
+    }
 }
+
 """
 type FishFields{
     name: String!
-    maxSpawnTemp: Int!
-    minSpawnTemp: Int!
-    maxTemp: Int!
-    minTemp: Int!
-    prefMaxSpawnTemp: Int!
-    prefMinSpawnTemp: Int!
+    maxSpawnTemp: Int
+    minSpawnTemp: Int
+    maxTemp: Int
+    minTemp: Int
+    prefMaxSpawnTemp: Int
+    prefMinSpawnTemp: Int
 }
 
 
