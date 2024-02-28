@@ -1,6 +1,6 @@
 import requests
 
-url = 'http://host.docker.internal:8080/v1/metadata'
+url = 'http://172.17.0.1:8080/v1/metadata'
 params = {
   "type": "pg_track_tables",
   "args": {
