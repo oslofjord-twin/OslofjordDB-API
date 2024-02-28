@@ -74,7 +74,7 @@ def txtToCSV(input_file, output_file):
 
 if __name__ == "__main__":
 
-    input_dir = "db/txt_files/"
+    input_dir = "../mnt/data/txt_files/"
     output_dir = "db/data/"
     
     for filename in os.listdir(input_dir):
