@@ -22,6 +22,16 @@ CREATE TABLE IF NOT EXISTS turbidity (
     location GEOGRAPHY(POINT, 4326)
 );
 
+CREATE TABLE IF NOT EXISTS runtime_monitoring(
+	id_sim int NOT NULL UNIQUE,
+	suitable_temperature boolean,
+	suitable_spawning_temperature boolean,
+	preferred_spawning_temperature boolean,
+	grid_id int,
+	species_name TEXT,
+	PRIMARY KEY (id_sim)
+);
+
 CREATE TABLE grid AS
 SELECT * FROM ST_SquareGrid(0.05, ST_MakeEnvelope(10, 59, 11, 59.95, 4326));
 
