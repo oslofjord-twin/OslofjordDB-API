@@ -35,17 +35,6 @@ services:
       timeout: 15s
       retries: 2
 
-  api-web-server:
-    container_name: api-web-server
-    restart: unless-stopped
-    build:
-      context: .
-    depends_on:
-      - timescale
-      - graphql-engine
-    ports:
-    - "3000:3000" 
-
   fuseki:
     container_name: fuseki
     restart: unless-stopped
