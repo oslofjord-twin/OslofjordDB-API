@@ -29,10 +29,6 @@ For more information about how to explore the data using GraphQL, I would recomm
 - Mutations: https://hasura.io/docs/latest/mutations/overview/
 - Subscriptions: https://hasura.io/docs/latest/subscriptions/overview/
 
-There is also an example of how to connect to our Hasura GraphQL endpoint using Apollo Client running on a next.js-server.
-- The example implementation can be found at: 'OslofjordDB/api/src/app/components/'
-- There is also some example queries located in: 'OslofjordDB/api/src/app/queries/gqlQueries.jsx'
-
 ## DB manager
 
 You can also connect to the database using another database manager. E.g. QGIS or DBeaver.
