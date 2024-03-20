@@ -1,10 +1,10 @@
 # OslofjordDB
 OslofjordDB
 
-Consists of six containers, one for the DB, one for Hasura, one for Apache Jena Fuseki, one for Grasp, one running a script only at startup, and one serving as the web-api.
+Consists of six containers, one for the DB, one for Hasura, one for Apache Jena Fuseki, one for Grasp and one running a script only at startup.
 
 ## Installation
-Here i will explain step by step how to install the docker container with some data in the database.
+Here I will explain step by step how to install the docker container with some data in the database.
 
 1. Install docker desktop
 2. Pull this repository
@@ -14,8 +14,7 @@ Here i will explain step by step how to install the docker container with some d
 ` python3 db/scripts/dataToCsv_postgre.py `
 
 6. Before we build the docker image it can be smart to change the password in the Docker compose-file. The password will later be used to connect to the database.
-7. Create docker volumes using `docker create volume db_data`
-8. Run `docker compose up -d` to start the containers in a detached state. 
+7. Run `docker compose up -d` to start the containers in a detached state. 
 To check that the containers are up and running, you can run `docker ps`.
 
 ## TODO after all the container are started:
