@@ -1,7 +1,7 @@
 # OslofjordDB
 OslofjordDB
 
-Consists of six containers, one for the DB, one for Hasura, one for Apache Jena Fuseki, one for Grasp and one running a script only at startup.
+Consists of five containers, one for the DB, one for Hasura, one for Apache Jena Fuseki, one for Grasp and one running a script only at startup.
 
 ## Installation
 Here I will explain step by step how to install the docker container with some data in the database.
