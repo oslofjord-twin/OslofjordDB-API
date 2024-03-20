@@ -59,14 +59,18 @@ services:
       - fuseki
       
   init:
+    container_name: init
     image: python:latest
     depends_on:
       graphql-engine:
         condition: service_healthy
     volumes:
+     - ./fuseki/ontology.ttl:/ontology.ttl
+     - ./db/scripts/upload_KG.py:/upload_KG.py
      - ./db/scripts/track_tables.py:/track_tables.py
+     - ./db/scripts/add_remote_schema.py:/add_remote_schema.py
     command: >
-      /bin/sh -c 'pip install requests && python track_tables.py'
+      /bin/sh -c 'pip install requests && python upload_KG.py && python track_tables.py && python add_remote_schema.py'
   
   simulation:
      container_name: hydrodrift

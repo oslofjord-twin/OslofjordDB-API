@@ -17,21 +17,6 @@ Here I will explain step by step how to install the docker container with some d
 7. Run `docker compose up -d` to start the containers in a detached state. 
 To check that the containers are up and running, you can run `docker ps`.
 
-## TODO after all the containers have started:
-Upload our Knowledge Graph:
-1. Go to http://localhost:3030/#/dataset/ds/upload (Apache Jena Fuseki UI)
-2. Upload the KnowledgeGraph.ttl-file available at https://github.uio.no/Oslofjord/OslofjordKG (or in the folder `/fuseki`, but this will probably be outdated)
-
-Make (the predefined queries) of the Knowledge Graph data available in our GraphQL API:
-1. Go to http://localhost:8080/console/remote-schemas/manage/schemas (Hasura)
-2. Press "Add"
-3. Fill in the following: 
-
-![alt text](<grasp-remote-schema.png>)
-
-4. Press "Add Remote Schema"
-5. Now the pre-defined SparQL queries found at `grasp/examples` will be available in our GraphQL API.
-
 After starting you can reach the following services:
 - Hasura can be reached at http://localhost:8080 (for playing around with graphql on our data).
 - Apache Jena Fuseki can be reached at http://localhost:3030
