@@ -33,3 +33,8 @@ def csvToSQL():
                     # Remove the trailing comma and new line character and add a semicolon at the end of the query
                     query = query[:-2] + ";\n"    
                     sql_file.write(query)
+        
+        for i in table_name:
+            id_query = "\nUPDATE {} \nSET grid_id = (select grid.id \nFROM grid, {} \nWHERE st_intersects({}.location, grid.geom)\nLIMIT 1);".format(i, i, i)
+
+            sql_file.write(id_query)

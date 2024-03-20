@@ -15,13 +15,15 @@ def txtToCSV(input_file, output_file):
 
         # Write the header row
         for i in range(7):
-            infile.readline()
-        coordinate = infile.readline()
-        for i in range(5):
-            infile.readline()
+            line = infile.readline()
+            if (i == 1):
+                filetype = line
+                filetype = filetype.strip()
+                filetype = re.split("\t", filetype)
 
-        filetype = infile.readline()
-        filetype = filetype.strip()
+        coordinate = infile.readline()
+        for i in range(3):
+            infile.readline()
 
         coordinate = coordinate.strip()
         coordinate = re.split("\t", coordinate)
@@ -32,11 +34,11 @@ def txtToCSV(input_file, output_file):
         coordinate[1] = tempCor
 
         coordinate = ' '.join(coordinate)
-        print(coordinate)
+        # print(coordinate)
 
         loc = f"POINT({coordinate})"
 
-        if(filetype == "Conductivity Sensor #399"):
+        if(filetype[1] == "Conductivity Sensor"):
             csv_writer.writerow(["salinity"])
             csv_writer.writerow(['Record time', 'Record number', 'Sensor status', 'Conductivity', 'Temperature', "Location"])
             infile.readline()
@@ -45,13 +47,13 @@ def txtToCSV(input_file, output_file):
                 columns = line.strip()
                 columns = re.split(r'\t+', columns)
                 # columns[0] = re.sub(" ", "T", columns[0])
-                columns[0] = columns[0] + "-08"
+                columns[0] = columns[0] + "+01"
                 columns.append(loc)
                 csv_writer.writerow(columns)
             
             return "salinity"
 
-        elif(filetype == "Turbidity Sensor #78"):
+        elif(filetype[1] == "Turbidity Sensor"):
             csv_writer.writerow(["turbidity"])
             csv_writer.writerow(['Record time', 'Record number', 'Sensor status', 'Turbidity', 'Temperature', "TXC Amp", "C1Amp", "C2Amp", "RawTemp", "Location"])
             infile.readline()
@@ -59,7 +61,7 @@ def txtToCSV(input_file, output_file):
                 # Split the line into columns using tab as the delimiter (adjust as needed)
                 columns = line.strip()
                 columns = re.split(r'\t+', columns)
-                columns[0] = columns[0] + "-08"
+                columns[0] = columns[0] + "+01"
                 columns.append(loc)
                 csv_writer.writerow(columns)
             
@@ -72,7 +74,7 @@ def txtToCSV(input_file, output_file):
 
 if __name__ == "__main__":
 
-    input_dir = "db/txt_files/"
+    input_dir = "~/mnt/data/txt_files/"
     output_dir = "db/data/"
     
     for filename in os.listdir(input_dir):
