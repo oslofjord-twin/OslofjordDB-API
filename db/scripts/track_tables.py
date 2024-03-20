@@ -96,6 +96,12 @@ params = {
                 },
                 "turbidity": {
                     "comment": "The turbidity value. Turbidity is the measure of relative clarity of a liquid"
+                },
+                "id_sim": {
+                    "comment": "The id of the simulation"
+                },
+                "grid_id": {
+                    "comment": "The id of the grid"
                 }
             },
           "comment": "Simulation values for virtual landers"
@@ -109,6 +115,36 @@ params = {
         "table": "grid",
         "configuration": {
           "comment": "Grid for the Oslofjord"
+        },
+        "apollo_federation_config": {
+          "enable": "v1"
+        }
+      },
+      {
+        "source": "default",
+        "table": "runtime_monitoring",
+        "configuration": {
+            "column_config": {
+                "id_sim": {
+                    "comment": "The id of the simulation"
+                },
+                "suitable_temperature": {
+                    "comment": "The suitable temperature for the species"
+                },
+                "suitable_spawning_temperature": {
+                    "comment": "The suitable spawning temperature for the species"
+                },
+                "preferred_spawning_temperature": {
+                    "comment": "The preferred spawning temperature for the species"
+                },
+                "grid_id": {
+                    "comment": "The id of the grid"
+                },
+                "species_name": {
+                    "comment": "The name of the species"
+                }
+            },
+          "comment": "Runtime monitoring of the Oslofjord"
         },
         "apollo_federation_config": {
           "enable": "v1"
