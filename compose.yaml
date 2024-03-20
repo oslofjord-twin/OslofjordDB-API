@@ -2,8 +2,9 @@ version: '3'
 services:
   timescale:
     container_name: timescale
-    image: timescale/timescaledb-ha:pg14-latest
+    image: timescale/timescaledb-ha:pg16
     restart: unless-stopped
+    user: root
     environment:
       POSTGRES_DB: postgres
       POSTGRES_USER: postgres
@@ -66,6 +67,14 @@ services:
      - ./db/scripts/track_tables.py:/track_tables.py
     command: >
       /bin/sh -c 'pip install requests && python track_tables.py'
+  
+  # simulation:
+  #   container_name: hydrodrift
+  #   restart: unless-stopped
+  #   build:
+  #     context: ../OslofjordSM
+  #     dockerfile: Dockerfile
+    
 
 volumes:
   db_data:

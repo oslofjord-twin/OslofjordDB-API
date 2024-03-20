@@ -17,7 +17,7 @@ Here I will explain step by step how to install the docker container with some d
 7. Run `docker compose up -d` to start the containers in a detached state. 
 To check that the containers are up and running, you can run `docker ps`.
 
-## TODO after all the container are started:
+## TODO after all the containers have started:
 Upload our Knowledge Graph:
 1. Go to http://localhost:3030/#/dataset/ds/upload (Apache Jena Fuseki UI)
 2. Upload the KnowledgeGraph.ttl-file available at https://github.uio.no/Oslofjord/OslofjordKG (or in the folder `/fuseki`, but this will probably be outdated)
