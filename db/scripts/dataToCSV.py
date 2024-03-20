@@ -89,5 +89,7 @@ if __name__ == "__main__":
             # read_csv_and_insert(output_file, sensor)
             # print("Converted to csv")
     
+    csvToSQL()
+
 
     print("Data converted to csv")
