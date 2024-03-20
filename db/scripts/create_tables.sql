@@ -1,17 +1,19 @@
 CREATE EXTENSION IF NOT EXISTS postgis;
 
 CREATE TABLE IF NOT EXISTS salinity (
-    record_time timestamptz,
-    record_number int,
+    record_time timestamptz NOT NULL,
+    record_number int NOT NULL,
     sensor_status varchar(50),
     conductivity numeric(10, 2),
     temperature numeric(10, 2),
-    location GEOGRAPHY(POINT, 4326)
+    location GEOGRAPHY(POINT, 4326),
+    grid_id int,
+    PRIMARY KEY(record_time, record_number)
 );
 
 CREATE TABLE IF NOT EXISTS turbidity (
-    record_time timestamptz,
-    record_number int,
+    record_time timestamptz NOT NULL,
+    record_number int NOT NULL,
     sensor_status varchar(50),
     turbidity numeric(10, 2),
     temperature numeric(10, 2),
@@ -19,17 +21,18 @@ CREATE TABLE IF NOT EXISTS turbidity (
     c1_amp numeric(10, 2),
     c2_amp numeric(10, 2),
     raw_temp numeric(10, 2),
-    location GEOGRAPHY(POINT, 4326)
+    grid_id int,
+    location GEOGRAPHY(POINT, 4326),
+    PRIMARY KEY(record_time, record_number)
 );
 
 CREATE TABLE IF NOT EXISTS runtime_monitoring(
-	id_sim int NOT NULL UNIQUE,
+	id_sim int NOT NULL UNIQUE PRIMARY KEY,
 	suitable_temperature boolean,
 	suitable_spawning_temperature boolean,
 	preferred_spawning_temperature boolean,
 	grid_id int,
-	species_name TEXT,
-	PRIMARY KEY (id_sim)
+	species_name TEXT
 );
 
 CREATE TABLE grid AS
