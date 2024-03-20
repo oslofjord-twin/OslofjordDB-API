@@ -12,6 +12,7 @@ def txtToCSV(input_file, output_file):
     with open(input_file, 'r', newline='') as infile, open(output_file, 'w', newline='') as outfile:
         # Create a CSV writer
         csv_writer = csv.writer(outfile)
+        # print("current file: " + input_file)
 
         # Write the header row
         for i in range(7):
@@ -35,6 +36,7 @@ def txtToCSV(input_file, output_file):
 
         coordinate = ' '.join(coordinate)
         # print(coordinate)
+        coordinate = "10.624583 59.658233"
 
         loc = f"POINT({coordinate})"
 
@@ -80,7 +82,9 @@ if __name__ == "__main__":
     for filename in os.listdir(input_dir):
         if filename.endswith('.txt'):
             input_file = os.path.join(input_dir, filename)
+            # print("Input file: " + input_file)
             output_file = os.path.join(output_dir, filename[:-4] + '.csv')
+            # print("Output file: " + output_file)
             txtToCSV(input_file, output_file)
             # read_csv_and_insert(output_file, sensor)
             # print("Converted to csv")
