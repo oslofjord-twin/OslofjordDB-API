@@ -122,11 +122,47 @@ params = {
       },
       {
         "source": "default",
+        "table": "requests",
+        "configuration": {
+            "column_config": {
+                "request_id": {
+                    "comment": "The id for the request"
+                },
+                "grid_id": {
+                    "comment": "The id for the grid"
+                },
+                "species_name": {
+                    "comment": "The name of the species"
+                },
+                "done": {
+                    "comment": "Boolean value signifying if the request is completed"
+                }
+            },
+          "comment": "Requests made by the front end to the monitoring component"
+        },
+        "apollo_federation_config": {
+          "enable": "v1"
+        }
+      },
+      {
+        "source": "default",
         "table": "runtime_monitoring",
         "configuration": {
             "column_config": {
+                "id": {
+                    "comment": "The id for the row"
+                },
+                "request_id": {
+                    "comment": "The id for the request"
+                }
                 "id_sim": {
                     "comment": "The id of the simulation"
+                },
+                "grid_id": {
+                    "comment": "The id of the grid"
+                },
+                "species_name": {
+                    "comment": "The name of the species"
                 },
                 "suitable_temperature": {
                     "comment": "The suitable temperature for the species"
@@ -136,12 +172,6 @@ params = {
                 },
                 "preferred_spawning_temperature": {
                     "comment": "The preferred spawning temperature for the species"
-                },
-                "grid_id": {
-                    "comment": "The id of the grid"
-                },
-                "species_name": {
-                    "comment": "The name of the species"
                 }
             },
           "comment": "Runtime monitoring of the Oslofjord"
