@@ -5,6 +5,7 @@ tacl_output=$(tacl ec260 --download-list --api-key $EC_API_KEY)
 
 echo "$tacl_output"
 
+
 # Extract the .txt file names from the tacl_output and download each file
 while read -r line; do
     if [[ $line == *".txt"* ]]; then
