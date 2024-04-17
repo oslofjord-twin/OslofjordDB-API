@@ -154,7 +154,7 @@ params = {
                 },
                 "request_id": {
                     "comment": "The id for the request"
-                }
+                },
                 "id_sim": {
                     "comment": "The id of the simulation"
                 },
