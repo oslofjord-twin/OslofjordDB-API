@@ -69,10 +69,10 @@ services:
      - ./db/scripts/upload_KG.py:/upload_KG.py
      - ./db/scripts/track_tables.py:/track_tables.py
      - ./db/scripts/add_remote_schema.py:/add_remote_schema.py
-     - ../OslofjordRV/request_listener.py:/request_listener.py
+     - ./db/scripts/create_event_trigger.py:/create_event_trigger.py
     command: >
-      /bin/sh -c 'pip install requests && pip install flask && python request_listener.py && python upload_KG.py && python track_tables.py && python add_remote_schema.py'
-  
+      /bin/sh -c 'pip install requests && python upload_KG.py && python track_tables.py && python add_remote_schema.py && python create_event_trigger.py'
+
   simulation:
      container_name: hydrodrift
      tty: true
@@ -80,18 +80,7 @@ services:
      build:
        context: ../OslofjordSM
        dockerfile: Dockerfile
-    
-  monitoring:
-    container_name: oslofjord-monitoring
-    build:
-      context: ../OslofjordRV
-      dockerfile: Dockerfile
-    
-  ngrok:
-    image: ngrok/ngrok:latest
-    #restart: unless-stopped
-    command: "ngrok http 5000 --authtoken 2dwmkbG5JJPuSzRmYOkM4US8Bl6_7uiDfK9uXPdiR3FFNuCQm --domain desired-insect-suitably.ngrok-free.app"
-    
+
 
 volumes:
   db_data:
