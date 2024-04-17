@@ -4,3 +4,7 @@ __pycache__
 load_data.sql
 .DS_Store
 .env*
+
+#Grasp:
+./grasp/node_modules
+./grasp/yarn.lock
