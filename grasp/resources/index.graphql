@@ -1,0 +1,13 @@
+directive @embedded on OBJECT
+
+type Query {
+  """
+  returns a quanto entry of IRI
+  """
+  fish: [Fish!]!
+  filterByT(temperature: Int!, name: String!): [FilterByT!]!
+  species: [Species!]!
+  triples: [Triples!]!
+  classes: [Classes!]!
+  fishFields(name: String!): [FishFields!]!
+}
