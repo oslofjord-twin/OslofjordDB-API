@@ -3,18 +3,19 @@ CREATE EXTENSION IF NOT EXISTS postgis;
 SET timezone = "Europe/Oslo";
 
 CREATE TABLE IF NOT EXISTS salinity (
-    record_time timestamptz,
-    record_number int,
+    record_time timestamptz NOT NULL,
+    record_number int NOT NULL,
     sensor_status varchar(50),
     conductivity numeric(10, 2),
     temperature numeric(10, 2),
     location GEOGRAPHY(POINT, 4326),
-    grid_id int
+    grid_id int,
+    PRIMARY KEY (record_time, record_number)
 );
 
 CREATE TABLE IF NOT EXISTS turbidity (
-    record_time timestamptz,
-    record_number int,
+    record_time timestamptz NOT NULL,
+    record_number int NOT NULL,
     sensor_status varchar(50),
     turbidity numeric(10, 2),
     temperature numeric(10, 2),
@@ -23,7 +24,8 @@ CREATE TABLE IF NOT EXISTS turbidity (
     c2_amp numeric(10, 2),
     raw_temp numeric(10, 2),
     location GEOGRAPHY(POINT, 4326),
-    grid_id int
+    grid_id int,
+    PRIMARY KEY (record_time, record_number)
 );
 
 CREATE TABLE IF NOT EXISTS runtime_monitoring (
@@ -44,9 +46,9 @@ CREATE TABLE IF NOT EXISTS requests (
 	done boolean NOT NULL DEFAULT 0
 );
 
-select create_hypertable('salinity', 'record_time', chunk_time_interval => INTERVAL '1 hour');
+select create_hypertable('salinity', 'record_time', chunk_time_interval => INTERVAL '1 day');
 
-select create_hypertable('turbidity', 'record_time', chunk_time_interval => INTERVAL '1 hour');
+select create_hypertable('turbidity', 'record_time', chunk_time_interval => INTERVAL '1 day');
 
 
 CREATE TABLE grid AS
