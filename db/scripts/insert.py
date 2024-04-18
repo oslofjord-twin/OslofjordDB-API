@@ -56,6 +56,48 @@ def insert_data_from_csv(csv_file_path, db_params):
     conn.close()
     print("All data inserted successfully")
 
+def update_grid_id(db_params):
+    conn = psycopg2.connect(**db_params)
+    cur = conn.cursor()
+    try:
+        # Prepare the INSERT statement
+        cur.execute("""
+            update salinity
+            set grid_id = (select grid.id
+            from grid, salinity
+            where st_intersects(salinity.location, grid.geom)
+            limit 1)
+            where salinity.grid_id IS NULL;
+        """)
+
+    except (Exception, psycopg2.DatabaseError) as error:
+        print("Error while updating salinity table:", error)
+        conn.rollback()  # rolling back in case of exception
+    
+    conn.commit()
+
+    try:
+        # Prepare the INSERT statement
+        cur.execute("""
+            update turbidity
+            set grid_id = (select grid.id
+            from grid, turbidity
+            where st_intersects(turbidity.location, grid.geom)
+            limit 1)
+            where turbidity.grid_id IS NULL;
+        """)
+
+    except (Exception, psycopg2.DatabaseError) as error:
+        print("Error while updating salinity table:", error)
+        conn.rollback()  # rolling back in case of exception
+    
+    conn.commit()
+
+    cur.close()
+    conn.close()
+    print("All data updated successfully")
+
+
 # Database connection parameters
 db_params = {
     'dbname': 'postgres',
@@ -75,4 +117,5 @@ for csv_file in os.listdir(input_dir):
         # Call the function
         insert_data_from_csv(input_file, db_params)
 
+update_grid_id(db_params)
 # insert_data_from_csv("/mnt/data/csv_files/20240403T165557_sal.csv", db_params)
