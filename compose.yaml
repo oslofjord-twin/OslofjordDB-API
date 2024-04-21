@@ -70,9 +70,10 @@ services:
      - ./db/scripts/upload_KG.py:/upload_KG.py
      - ./db/scripts/track_tables.py:/track_tables.py
      - ./db/scripts/add_remote_schema.py:/add_remote_schema.py
+     - ./db/scripts/create_event_trigger.py:/create_event_trigger.py
     command: >
-      /bin/sh -c 'pip install requests && python upload_KG.py && python track_tables.py && python add_remote_schema.py'
-  
+      /bin/sh -c 'pip install requests && python upload_KG.py && python track_tables.py && python add_remote_schema.py && python create_event_trigger.py'
+
   simulation:
      container_name: hydrodrift
      tty: true
@@ -80,7 +81,7 @@ services:
      build:
        context: ../OslofjordSM
        dockerfile: Dockerfile
-    
+
 
 volumes:
   db_data:
