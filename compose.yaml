@@ -70,8 +70,9 @@ services:
      - ./db/scripts/track_tables.py:/track_tables.py
      - ./db/scripts/add_remote_schema.py:/add_remote_schema.py
      - ./db/scripts/create_event_trigger.py:/create_event_trigger.py
+     - ../OslofjordRV/request_listener.py:/request_listener.py
     command: >
-      /bin/sh -c 'pip install requests && python upload_KG.py && python track_tables.py && python add_remote_schema.py && python create_event_trigger.py'
+      /bin/sh -c 'pip install requests && pip install flask && python upload_KG.py && python track_tables.py && python add_remote_schema.py && python create_event_trigger.py && python request_listener.py'
 
   simulation:
      container_name: hydrodrift
@@ -81,6 +82,26 @@ services:
        context: ../OslofjordSM
        dockerfile: Dockerfile
 
+  monitoring:
+    container_name: monitoring
+    tty: true
+    build:
+      context: ../OslofjordRV
+      dockerfile: Dockerfile
+
+  ngrok:
+    container_name: ngrok
+    image: ngrok/ngrok:latest
+    restart: unless-stopped
+    command:
+      - "start"
+      - "--all"
+      - "--config"
+      - "ngrok.yml"
+    volumes:
+      - ../OslofjordRV/ngrok.yml:/ngrok.yml
+    ports:
+      - 5000:5000
 
 volumes:
   db_data:

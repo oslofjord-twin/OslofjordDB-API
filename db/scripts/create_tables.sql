@@ -32,8 +32,6 @@ CREATE TABLE IF NOT EXISTS runtime_monitoring (
 	id SERIAL PRIMARY KEY,
 	request_id int NOT NULL,
 	id_sim int NOT NULL
-	grid_id int NOT NULL,
-	species_name TEXT NOT NULL,
 	suitable_temperature boolean,
 	suitable_spawning_temperature boolean,
 	preferred_spawning_temperature boolean
