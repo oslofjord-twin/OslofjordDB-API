@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS turbidity (
 CREATE TABLE IF NOT EXISTS runtime_monitoring (
 	id SERIAL PRIMARY KEY,
 	request_id int NOT NULL,
-	id_sim int NOT NULL
+	id_sim int NOT NULL,
 	suitable_temperature boolean,
 	suitable_spawning_temperature boolean,
 	preferred_spawning_temperature boolean
@@ -41,7 +41,7 @@ CREATE TABLE IF NOT EXISTS requests (
 	request_id SERIAL PRIMARY KEY,
 	grid_id int NOT NULL,
 	species_name TEXT NOT NULL,
-	done boolean NOT NULL DEFAULT 0
+	done boolean NOT NULL DEFAULT false
 );
 
 select create_hypertable('salinity', 'record_time', chunk_time_interval => INTERVAL '1 day');
