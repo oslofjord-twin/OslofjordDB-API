@@ -1,6 +1,6 @@
 #!/bin/bash
 cd /mnt/data/txt_files
-source ~/.zshrc
+source /mnt/data/key.txt
 
 tacl_output=$(tacl ec260 --download-list --api-key $EC_API_KEY)
 
