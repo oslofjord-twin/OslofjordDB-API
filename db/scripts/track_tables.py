@@ -158,12 +158,6 @@ params = {
                 "id_sim": {
                     "comment": "The id of the simulation"
                 },
-                "grid_id": {
-                    "comment": "The id of the grid"
-                },
-                "species_name": {
-                    "comment": "The name of the species"
-                },
                 "suitable_temperature": {
                     "comment": "The suitable temperature for the species"
                 },

@@ -31,7 +31,7 @@ services:
       - serve
       - --enable-console
     healthcheck:
-      test: curl --fail http://localhost:8080/ || exit 1
+      test: curl --fail http://172.17.0.1:8080/ || exit 1
       interval: 40s
       timeout: 15s
       retries: 2
@@ -81,6 +81,12 @@ services:
        context: ../OslofjordSM
        dockerfile: Dockerfile
 
+  monitoring:
+    container_name: monitoring
+    tty: true
+    build:
+      context: ../OslofjordRV
+      dockerfile: Dockerfile
 
 volumes:
   db_data:
