@@ -46,9 +46,9 @@ CREATE TABLE IF NOT EXISTS requests (
 	done boolean NOT NULL DEFAULT 0
 );
 
-select create_hypertable('salinity', 'record_time', chunk_time_interval => INTERVAL '1 day');
+select create_hypertable('salinity', by_range('recorded_time', INTERVAL '1 day'));
 
-select create_hypertable('turbidity', 'record_time', chunk_time_interval => INTERVAL '1 day');
+select create_hypertable('turbidity', by_range('recorded_time', INTERVAL '1 day'));
 
 
 CREATE TABLE grid AS
