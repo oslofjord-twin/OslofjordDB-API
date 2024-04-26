@@ -44,8 +44,8 @@ CREATE TABLE IF NOT EXISTS requests (
 	done boolean NOT NULL DEFAULT false
 );
 
-select create_hypertable('salinity', by_range('recorded_time', INTERVAL '1 day'));
-select create_hypertable('turbidity', by_range('recorded_time', INTERVAL '1 day'));
+select create_hypertable('salinity', by_range('record_time', INTERVAL '1 day'));
+select create_hypertable('turbidity', by_range('record_time', INTERVAL '1 day'));
 
 CREATE TABLE grid AS
 SELECT * FROM ST_SquareGrid(0.05, ST_MakeEnvelope(10, 59, 11, 59.95, 4326));
