@@ -12,7 +12,6 @@ RUN <<EOF
     apt-get -y update
     DEBIAN_FRONTEND=noninteractive apt-get -y install openjdk-17-jdk-headless python3 python3-pip liblapack3 wget
     rm -rf /var/lib/apt/lists/*
-    pip3 install pyzmq
 EOF
 COPY . /fuseki
 COPY /docker_fuseki_config.ttl /fuseki
