@@ -3,8 +3,8 @@ import os
 
 
 def csvToSQL():
-    csv_folder = '/mnt/data/csv_files/' 
-    sql_file = '/mnt/data/Oslofjord/OslofjordDB/db/scripts/load_data.sql'
+    csv_folder = './OslofjordDB/db/data' 
+    sql_file = './OslofjordDB/db/scripts/load_data.sql'
 
     table_name = ['turbidity', 'salinity']
     columns = [['record_time', 'record_number', 'sensor_status', 'turbidity', 'temperature', 'txc_amp', 'c1_amp', 'c2_amp', 'raw_temp', 'location'], 
