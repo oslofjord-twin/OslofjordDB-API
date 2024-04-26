@@ -114,6 +114,20 @@ params = {
         "source": "default",
         "table": "grid",
         "configuration": {
+            "column_config": {
+                "geom": {
+                    "comment": "The geometry of the grid"
+                },
+                "i": {
+                    "comment": "The i value of the grid"
+                },
+                "j": {
+                    "comment": "The j value of the grid"
+                },
+                "id": {
+                    "comment": "The id for the grid"
+                }
+            },
           "comment": "Grid for the Oslofjord"
         },
         "apollo_federation_config": {
