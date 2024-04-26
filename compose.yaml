@@ -15,7 +15,9 @@ services:
     -  db_data:/home/postgres/pgdata/data
     - ./db/scripts/create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
     - ./db/scripts/load_data.sql:/docker-entrypoint-initdb.d/load_data.sql
+
   graphql-engine:
+    container-name: hasura
     image: hasura/graphql-engine:v2.35.1-ce.cli-migrations-v2
     ports:
     - "8080:8080"
@@ -25,7 +27,6 @@ services:
     environment:
       HASURA_GRAPHQL_DATABASE_URL: postgres://postgres:postgrespassword@timescale:5432/postgres
       HASURA_GRAPHQL_ADMIN_SECRET: mylongsecretkey
-      HASURA_GRAPHQL_ENABLED_LOG_TYPES: query-log
     command:
       - graphql-engine
       - serve
@@ -45,7 +46,7 @@ services:
     ports:
     - "3030:3030" 
     volumes:
-    - fuseki_data:/usr/local/src/fuseki/run/databases
+    - fuseki_data:/fuseki/run/databases
   
   grasp:
     container_name: grasp
@@ -76,7 +77,6 @@ services:
   simulation:
      container_name: hydrodrift
      tty: true
-     #restart: unless-stopped
      build:
        context: ../OslofjordSM
        dockerfile: Dockerfile
