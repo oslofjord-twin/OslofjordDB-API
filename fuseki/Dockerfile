@@ -12,22 +12,21 @@ RUN <<EOF
     apt-get -y update
     DEBIAN_FRONTEND=noninteractive apt-get -y install openjdk-17-jdk-headless python3 python3-pip liblapack3 wget
     rm -rf /var/lib/apt/lists/*
-    pip3 install pyzmq
 EOF
-COPY . /usr/local/src/fuseki
-COPY /docker_fuseki_config.ttl /usr/local/src/fuseki
+COPY . /fuseki
+COPY /docker_fuseki_config.ttl /fuseki
 
 # Set the working directory
-WORKDIR /usr/local/src/fuseki
+WORKDIR /fuseki
 
 # Download and copy the tar.gz file into the container
-ADD https://dlcdn.apache.org/jena/binaries/apache-jena-fuseki-5.0.0.tar.gz /usr/local/src/fuseki
+ADD https://dlcdn.apache.org/jena/binaries/apache-jena-fuseki-5.0.0.tar.gz /fuseki
 
 # Extract the tar.gz file
 RUN tar -xvzf apache-jena-fuseki-5.0.0.tar.gz
 
 # Execute the command
-CMD /usr/local/src/fuseki/apache-jena-fuseki-5.0.0/fuseki-server --update --config docker_fuseki_config.ttl
+CMD /fuseki/apache-jena-fuseki-5.0.0/fuseki-server --update --config docker_fuseki_config.ttl
 
 # Expose port 3030
 EXPOSE 3030

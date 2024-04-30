@@ -3,8 +3,8 @@ import os
 
 
 def csvToSQL():
-    csv_folder = './db/data/' 
-    sql_file = './db/scripts/load_data.sql'
+    csv_folder = './OslofjordDB/db/data/' 
+    sql_file = './OslofjordDB/db/scripts/load_data.sql'
 
     table_name = ['turbidity', 'salinity']
     columns = [['record_time', 'record_number', 'sensor_status', 'turbidity', 'temperature', 'txc_amp', 'c1_amp', 'c2_amp', 'raw_temp', 'location'], 
@@ -38,3 +38,5 @@ def csvToSQL():
             id_query = "\nUPDATE {} \nSET grid_id = (select grid.id \nFROM grid, {} \nWHERE st_intersects({}.location, grid.geom)\nLIMIT 1);".format(i, i, i)
 
             sql_file.write(id_query)
+
+csvToSQL()

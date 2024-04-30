@@ -5,3 +5,7 @@ load_data.sql
 .DS_Store
 .env*
 package-lock.json
+
+#Grasp:
+./grasp/node_modules
+./grasp/yarn.lock
