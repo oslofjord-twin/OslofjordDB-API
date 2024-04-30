@@ -1,11 +1,7 @@
 # OslofjordDB-API
-OslofjordDB-API
-
 Consists of five containers, one for the DB, one for Hasura, one for Apache Jena Fuseki, one for Grasp and one running a script only at startup.
 
 ## Installation
-Here I will explain step by step how to install the docker container with some data in the database.
-
 1. Install Docker
 2. Clone this repository `git clone git@github.com:oslofjord-twin/OslofjordDB-API.git`
 3. `cd` into `OslofjordDB-API`
