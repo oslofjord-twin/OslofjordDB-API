@@ -17,7 +17,7 @@ services:
     - ./db/scripts/load_data.sql:/docker-entrypoint-initdb.d/load_data.sql
 
   graphql-engine:
-    container-name: hasura
+    container_name: hasura
     image: hasura/graphql-engine:v2.35.1-ce.cli-migrations-v2
     ports:
     - "8080:8080"
@@ -87,6 +87,21 @@ services:
     build:
       context: ../OslofjordRV
       dockerfile: Dockerfile
+  
+  frontend:
+    container_name: frontend
+    restart: unless-stopped
+    build:
+      context: ../OslofjordFE
+    depends_on:
+      - timescale
+      - graphql-engine
+      - fuseki
+      - simulation
+      - monitoring
+      - init
+    ports:
+    - "3000:3000"
 
 volumes:
   db_data:
