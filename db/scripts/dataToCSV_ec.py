@@ -57,7 +57,7 @@ def txtToCSV(input_file, output_file):
                 columns = line.strip()
                 columns = re.split(r'\t+', columns)
                 # columns[0] = re.sub(" ", "T", columns[0])
-                columns[0] = columns[0] + "+01"
+                columns[0] = columns[0] + "+02"
                 columns.append(loc)
                 csv_writer.writerow(columns)
             
@@ -80,7 +80,7 @@ def txtToCSV(input_file, output_file):
                 # Split the line into columns using tab as the delimiter (adjust as needed)
                 columns = line.strip()
                 columns = re.split(r'\t+', columns)
-                columns[0] = columns[0] + "+01"
+                columns[0] = columns[0] + "+02"
                 columns.append(loc)
                 csv_writer.writerow(columns)
             

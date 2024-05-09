@@ -1,6 +1,9 @@
 import csv
 import os
 import psycopg2
+import time
+
+
 
 def insert_data_from_csv(csv_file_path, db_params):
     # Connect to the PostgreSQL database
@@ -14,42 +17,24 @@ def insert_data_from_csv(csv_file_path, db_params):
         table_name = table_name[0]
         next(reader)
 
-        for row in reader:
-            if (table_name == "turbidity"):
-                try:
-                    # Prepare the INSERT statement
-                    cur.execute(f"""
+        if (table_name == "turbidity"):
+            args_str = ','.join(cur.mogrify("(%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)", i).decode('utf-8')
+                for i in reader)
+        else:
+            args_str = ','.join(cur.mogrify("(%s, %s, %s, %s, %s, %s)", i).decode('utf-8')
+                for i in reader)
+
+        if(table_name == "turbidity"):
+            cur.execute(f"""
                         INSERT INTO {table_name} 
                         (record_time, record_number, sensor_status, turbidity, 
-                        temperature, txc_amp, c1_amp, c2_amp, raw_temp, location)
-                        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s);
-                    """, row)
-
-                    # Commit the transaction for each row, alternatively commit outside the loop for all rows at once
-                    # conn.commit()
-
-                except (Exception, psycopg2.DatabaseError) as error:
-                    print("Error while inserting data:", error)
-                    conn.rollback()  # rolling back in case of exception
-                    break  # you may remove the break if you want to continue with the next rows
-            else:
-                try:
-                    # Prepare the INSERT statement
-                    cur.execute(f"""
+                        temperature, txc_amp, c1_amp, c2_amp, raw_temp, location) VALUES """ + args_str) 
+        else:
+            cur.execute(f"""
                         INSERT INTO {table_name} 
                         (record_time, record_number, sensor_status, conductivity, 
-                        temperature, location)
-                        VALUES (%s, %s, %s, %s, %s, %s);
-                    """, row)
+                        temperature, location) VALUES """ + args_str)
 
-                    # Commit the transaction for each row, alternatively commit outside the loop for all rows at once
-                    # conn.commit()
-
-                except (Exception, psycopg2.DatabaseError) as error:
-                    print("Error while inserting data:", error)
-                    conn.rollback()  # rolling back in case of exception
-                    break  # you may remove the break if you want to continue with the next rows
-        
         conn.commit()
     # Close the database connection
     cur.close()
@@ -90,13 +75,11 @@ def update_grid_id(db_params):
     except (Exception, psycopg2.DatabaseError) as error:
         print("Error while updating salinity table:", error)
         conn.rollback()  # rolling back in case of exception
-    
-    conn.commit()
 
+    conn.commit()
     cur.close()
     conn.close()
     print("All data updated successfully")
-
 
 # Database connection parameters
 db_params = {
@@ -117,5 +100,10 @@ for csv_file in os.listdir(input_dir):
         # Call the function
         insert_data_from_csv(input_file, db_params)
 
+# t = time.perf_counter()
+# insert_data_from_csv('/mnt/data/csv_files/20240410T000001_sal.csv', db_params)
+# insert_data_from_csv('/mnt/data/csv_files/20240410T000013_turb.csv', db_params)
 update_grid_id(db_params)
+# fin = time.perf_counter() - t
+# print(f"Time used: {fin}")
 # insert_data_from_csv("/mnt/data/csv_files/20240403T165557_sal.csv", db_params)
