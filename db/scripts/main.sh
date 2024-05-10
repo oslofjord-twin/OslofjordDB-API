@@ -20,10 +20,10 @@ while read -r line; do
 done <<< "$tacl_output"
 
 
-bash /mnt/data/Oslofjord/OslofjordDB/db/scripts/emptyFolder.sh
+bash /mnt/data/Oslofjord/OslofjordDB-API/db/scripts/emptyFolder.sh
 
-bash /mnt/data/Oslofjord/OslofjordDB/db/scripts/ecCopy.sh
+bash /mnt/data/Oslofjord/OslofjordDB-API/db/scripts/ecCopy.sh
 
-python3 /mnt/data/Oslofjord/OslofjordDB/db/scripts/dataToCSV_ec.py
+python3 /mnt/data/Oslofjord/OslofjordDB-API/db/scripts/dataToCSV_ec.py
 
-python3 /mnt/data/Oslofjord/OslofjordDB/db/scripts/insert.py
+python3 /mnt/data/Oslofjord/OslofjordDB-API/db/scripts/insert.py

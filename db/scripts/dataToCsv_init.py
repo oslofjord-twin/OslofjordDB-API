@@ -94,7 +94,7 @@ def txtToCSV(input_file, output_file):
 if __name__ == "__main__":
 
     input_dir = "./Oslofjord-data/"
-    output_dir = "./OslofjordDB/db/data"
+    output_dir = "./OslofjordDB-API/db/data"
     
     for filename in os.listdir(input_dir):
         if filename.endswith('.txt'):
