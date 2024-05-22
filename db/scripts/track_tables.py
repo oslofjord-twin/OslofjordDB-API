@@ -34,14 +34,6 @@ params = {
                     },
                     "comment": "Salinity in the Oslofjord"
                 },
-                "object_relationships": [
-                    {
-                        "name": "grid",
-                        "using": {
-                            "foreign_key_constraint_on": "grid_id"
-                        }
-                    }
-                ],
                 "apollo_federation_config": {
                     "enable": "v1"
                 }
@@ -84,14 +76,6 @@ params = {
                     },
                     "comment": "Turbidity in the Oslofjord"
                 },
-                "object_relationships": [
-                    {
-                        "name": "grid",
-                        "using": {
-                            "foreign_key_constraint_on": "grid_id"
-                        }
-                    }
-                ],
                 "apollo_federation_config": {
                     "enable": "v1"
                 }
@@ -125,14 +109,6 @@ params = {
                     },
                     "comment": "Simulation values for virtual landers"
                 },
-                "object_relationships": [
-                    {
-                        "name": "grid",
-                        "using": {
-                            "foreign_key_constraint_on": "grid_id"
-                        }
-                    }
-                ],
                 "apollo_federation_config": {
                     "enable": "v1"
                 }
@@ -181,14 +157,6 @@ params = {
                     },
                     "comment": "Requests made by the front end to the monitoring component"
                 },
-                "object_relationships": [
-                    {
-                        "name": "grid",
-                        "using": {
-                            "foreign_key_constraint_on": "grid_id"
-                        }
-                    }
-                ],
                 "apollo_federation_config": {
                     "enable": "v1"
                 }
