@@ -64,3 +64,15 @@ CREATE TABLE IF NOT EXISTS simulations (
     id_sim SERIAL PRIMARY KEY,
     grid_id int
 );
+
+ALTER TABLE simulations
+ADD FOREIGN KEY (grid_id) REFERENCES grid(id);
+
+ALTER TABLE salinity
+ADD FOREIGN KEY (grid_id) REFERENCES grid(id);
+
+ALTER TABLE turbidity
+ADD FOREIGN KEY (grid_id) REFERENCES grid(id);
+
+ALTER TABLE requests
+ADD FOREIGN KEY (grid_id) REFERENCES grid(id)
