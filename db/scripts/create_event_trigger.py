@@ -1,6 +1,12 @@
 import requests
+import os
 
-url = 'http://172.17.0.1:8080/v1/metadata'
+hasura_host = os.getenv("HASURA_HOST", "localhost")
+hasura_url = f"http://{hasura_host}:8080/v1/metadata"
+
+monitoring_host = os.getenv("MONITORING_HOST", "localhost")
+monitoring_url = f"http://{monitoring_host}:5001/new-request"
+
 params = {
 	"type" : "pg_create_event_trigger",
 	"args" : {
@@ -10,7 +16,7 @@ params = {
 			"name": "requests",
 			"schema": "public"
 		},
-		"webhook": "https://desired-insect-suitably.ngrok-free.app/new-request",
+		"webhook": monitoring_url,
 		"insert": {
 			"columns": "*"
 		},
@@ -31,5 +37,5 @@ params = {
 
 headers = {"Content-Type": "application/json", "X-Hasura-Role": "admin", "x-hasura-admin-secret": "mylongsecretkey"}
 
-response = requests.post(url, json=params, headers=headers)
+response = requests.post(hasura_url, json=params, headers=headers)
 print(response.content)
