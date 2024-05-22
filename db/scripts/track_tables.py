@@ -232,3 +232,25 @@ headers = {"Content-Type": "application/json",
 
 response = requests.post(hasura_url, json=params, headers=headers)
 print(response.content)
+
+
+def create_params(table_name: str, foreign_key: str) -> object:
+    return {
+        "type": "pg_create_object_relationship",
+        "args": {
+            "table": f"{table_name}",
+            "name": "grid",
+            "source": "default",
+            "using": {
+                "foreign_key_constraint_on": [f"{foreign_key}"]
+            }
+        }
+    }
+
+
+grid_id_tables = ["requests", "salinity", "simulations", "turbidity"]
+
+
+for table in grid_id_tables:
+    response = requests.post(hasura_url, json=create_params(table, "grid_id"), headers=headers)
+    print(response.content)
