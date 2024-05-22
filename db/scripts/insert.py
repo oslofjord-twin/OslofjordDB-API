@@ -2,7 +2,9 @@ import csv
 import os
 import psycopg2
 import time
+import os
 
+db_host = os.getenv("DB_HOST", "localhost")
 
 
 def insert_data_from_csv(csv_file_path, db_params):
@@ -86,7 +88,7 @@ db_params = {
     'dbname': 'postgres',
     'user': 'postgres',
     'password': 'postgrespassword',
-    'host': '172.17.0.1',
+    'host': db_host,
     'port': '5432'  # default PostgreSQL port is 5432
 }
 

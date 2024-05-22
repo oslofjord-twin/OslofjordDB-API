@@ -1,12 +1,18 @@
 import requests
+import os
 
-url = 'http://172.17.0.1:8080/v1/metadata'
+hasura_host = os.getenv("HASURA_HOST", "localhost")
+hasura_url = f"http://{hasura_host}:8080/v1/metadata"
+
+grasp_host = os.getenv("GRASP_HOST", "localhost")
+grasp_url = f"http://{grasp_host}:4000"
+
 params = {
   "type": "add_remote_schema",
     "args": {
         "name": "Grasp",
         "definition": {
-            "url": "http://172.17.0.1:4000",
+            "url": grasp_url,
             "headers": [{"name": "Content-Type", "value": "application/json"}],
             "forward_client_headers": False,
             "timeout_seconds": 60
@@ -17,5 +23,5 @@ params = {
 
 headers = {"Content-Type": "application/json", "X-Hasura-Role": "admin", "x-hasura-admin-secret": "mylongsecretkey"}
 
-response = requests.post(url, json=params, headers=headers)
+response = requests.post(hasura_url, json=params, headers=headers)
 print(response.content)
