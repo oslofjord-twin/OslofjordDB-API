@@ -62,7 +62,8 @@ CREATE TABLE IF NOT EXISTS simulations (
     turbidity numeric(10, 2),
     location GEOGRAPHY(POINT, 4326),
     id_sim SERIAL PRIMARY KEY,
-    grid_id int
+    grid_id int,
+    changed boolean NOT NULL DEFAULT false
 );
 
 ALTER TABLE simulations
