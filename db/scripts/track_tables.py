@@ -190,6 +190,27 @@ params = {
                 "apollo_federation_config": {
                     "enable": "v1"
                 }
+            },
+            {
+                "source": "default",
+                "table": "anoxic_basins",
+                "configuration": {
+                    "column_config": {
+                        "basin_name": {
+                          "comment": "Name of the part of the fjord"
+                        },
+                        "area": {
+                            "comment": "Polygon that defines area of the fjord"
+                        },
+                        "depth": {
+                            "comment": "Everything below this depth is anoxic"
+                        }
+                    },
+                    "comment": "Areas of anoxic basins in the Oslo Fjord"
+                },
+                "apollo_federation_config": {
+                    "enable": "v1"
+                }
             }
         ]
     }
