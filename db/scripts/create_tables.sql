@@ -44,6 +44,12 @@ CREATE TABLE IF NOT EXISTS requests (
 	done boolean NOT NULL DEFAULT false
 );
 
+CREATE TABLE IF NOT EXISTS anoxic_basins (
+	basin_name varchar(100) NOT NULL,
+	area geometry NOT NULL,
+	depth int NOT NULL
+);
+
 select create_hypertable('salinity', by_range('record_time', INTERVAL '1 day'));
 select create_hypertable('turbidity', by_range('record_time', INTERVAL '1 day'));
 
