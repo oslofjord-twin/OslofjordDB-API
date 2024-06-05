@@ -38,5 +38,7 @@ def csvToSQL():
             id_query = "\nUPDATE {} \nSET grid_id = (select grid.id \nFROM grid, {} \nWHERE st_intersects({}.location, grid.geom)\nLIMIT 1);".format(i, i, i)
 
             sql_file.write(id_query)
+        
+        sql_file.write("\n\n")
 
 csvToSQL()
