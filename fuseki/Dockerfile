@@ -6,7 +6,7 @@
 #     docker run -it --rm -v "$PWD":/root/smol -p 3030:3030 fuseki
 
 # Use a base image, for example, Ubuntu
-FROM ubuntu:latest
+FROM ubuntu:24.04
 
 RUN <<EOF
     apt-get -y update
