@@ -193,6 +193,26 @@ params = {
             },
             {
                 "source": "default",
+                "table": "secchi_depth",
+                "configuration": {
+                    "column_config": {
+                        "id": {"comment": "Row id"},
+                        "record_time": {"comment": "Timestamp of the Secchi measurement (timestamptz)"},
+                        "depth_m": {"comment": "Measured Secchi disk depth in meters"},
+                        "location": {"comment": "Optional measurement location (PostGIS geography POINT, EPSG:4326)"},
+                        "grid_id": {"comment": "Optional grid cell id"},
+                        "source": {"comment": "Source identifier, e.g., secchi-sort"},
+                        "quality": {"comment": "Optional quality/confidence (0-1)"},
+                        "note": {"comment": "Optional free-text note"}
+                    },
+                    "comment": "Secchi disk depth measurements"
+                },
+                "apollo_federation_config": {
+                    "enable": "v1"
+                }
+            },
+            {
+                "source": "default",
                 "table": "anoxic_basins",
                 "configuration": {
                     "column_config": {
@@ -236,8 +256,7 @@ def create_params(table_name: str, foreign_key: str) -> object:
         }
     }
 
-
-grid_id_tables = ["requests", "salinity", "simulations", "turbidity"]
+grid_id_tables = ["requests", "salinity", "simulations", "turbidity", "secchi_depth"]
 
 
 for table in grid_id_tables:

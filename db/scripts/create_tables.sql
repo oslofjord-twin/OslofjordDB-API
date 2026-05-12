@@ -82,4 +82,22 @@ ALTER TABLE turbidity
 ADD FOREIGN KEY (grid_id) REFERENCES grid(id);
 
 ALTER TABLE requests
-ADD FOREIGN KEY (grid_id) REFERENCES grid(id)
+ADD FOREIGN KEY (grid_id) REFERENCES grid(id);
+
+-- Secchi disk depth measurements
+CREATE TABLE IF NOT EXISTS secchi_depth (
+    id SERIAL PRIMARY KEY,
+    record_time timestamptz NOT NULL,
+    depth_m numeric(10, 2) NOT NULL,
+    location GEOGRAPHY(POINT, 4326),
+    grid_id int,
+    source text,
+    quality numeric(5, 2),
+    note text
+);
+
+-- Make it a hypertable partitioned by record_time (idempotent)
+SELECT create_hypertable('secchi_depth', by_range('record_time', INTERVAL '1 day'), if_not_exists => TRUE);
+
+ALTER TABLE secchi_depth
+ADD FOREIGN KEY (grid_id) REFERENCES grid(id);

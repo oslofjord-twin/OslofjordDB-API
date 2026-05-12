@@ -26,7 +26,7 @@ ADD https://archive.apache.org/dist/jena/binaries/apache-jena-fuseki-5.3.0.tar.g
 RUN tar -xvzf apache-jena-fuseki-5.3.0.tar.gz
 
 # Execute the command
-CMD /fuseki/apache-jena-fuseki-5.3.0/fuseki-server --update --config docker_fuseki_config.ttl
+CMD /fuseki/apache-jena-fuseki-5.3.0/fuseki-server --config docker_fuseki_config.ttl
 
 # Expose port 3030
 EXPOSE 3030
